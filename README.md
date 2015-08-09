@@ -1,5 +1,13 @@
 # norminette-linter package
 
-A short description of your package.
+A linter for the 42 school norm.
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+Some settings are present:
+	* the extensions linted
+	* the path of the `norminette bin`
+
+### warning !
+
+to be able to use this linter you'll need to install [linter](https://atom.io/packages/linter)
+
+![norminette in action](http://i.imgur.com/kHPa6oO.png)

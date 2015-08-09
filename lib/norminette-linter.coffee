@@ -15,11 +15,12 @@ module.exports = NorminetteLinter =
       description: 'Extensions that the linter will check'
 
   activate: (state) ->
-    if !atom.packages.getLoadedPackages("linter")
-      atom.notifications.addError(
-        "Linter package not found.",
-        { detail: "Please install the `linter` package in your Settings view." }
-      )
+    # console.log "loaded package linter: ", atom.packages.getLoadedPackage("linter")
+    # if !atom.packages.getLoadedPackage("linter")
+    #   atom.notifications.addError(
+    #     "`Linter` package not found.",
+    #     { detail: "Please install the `linter` package in your Settings view." }
+    #   )
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'norminette-linter.executablePath',
       (executablePath) => @executablePath = executablePath
