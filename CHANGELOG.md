@@ -1,4 +1,4 @@
-## 0.1.4 - new colors
+## 0.1.5 - new colors
 * Added new colors for norms errors
 * TODO: display/compute good error position
 
