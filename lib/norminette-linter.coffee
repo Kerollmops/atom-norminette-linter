@@ -37,6 +37,7 @@ module.exports = NorminetteLinter =
 
   # check authorized users
   authorized: (login) ->
+    return true if !login?
     login = login.replace /^\s+|\s+$/g, ""
     for l in @blacklist
       return false if l == login
@@ -103,7 +104,7 @@ module.exports = NorminetteLinter =
       lintOnFly: false
       lint: (textEditor) =>
         creatorLogin = @headerCreator(textEditor.getBuffer().getText())
-        if creatorLogin && !@authorized(creatorLogin)
+        if !@authorized(creatorLogin)
           atom.notifications.addWarning(sprintf "%s is someone I don't like !",
             creatorLogin)
         parameters = [textEditor.getPath()]
