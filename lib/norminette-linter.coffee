@@ -1,5 +1,7 @@
 {CompositeDisposable} = require "atom"
+sprintf = require('sprintf-js').sprintf
 path = require 'path'
+fs = require 'fs'
 
 module.exports = NorminetteLinter =
   config:
@@ -14,15 +16,36 @@ module.exports = NorminetteLinter =
         type: 'string'
       description: 'Extensions that the linter will check.'
 
+  blacklist: ["wandre", "agoomany"]
+  login: null
+
   activate: (state) ->
+    @login = process.env.USER ? null
+    if !@authorized(@login)
+      atom.notifications.addError(
+        sprintf "sorry, %s you are not authorized to use the norminette linter \
+          because I don't like you...", @login)
+      return
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'norminette-linter.executablePath',
       (executablePath) => @executablePath = executablePath
     @subscriptions.add atom.config.observe 'norminette-linter.checkedExtensions'
-      , (checkedExtensions) => @checkedExtensions = checkedExtensions
+    , (checkedExtensions) => @checkedExtensions = checkedExtensions
 
   deactivate: ->
     @subscriptions.dispose()
+
+  # check authorized users
+  authorized: (login) ->
+    login = login.replace /^\s+|\s+$/g, ""
+    for l in @blacklist
+      return false if l == login
+    return true
+
+  headerCreator: (textBuffer) ->
+    createdPat = /Created: \d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2} by (.{1,8})/
+    if matches = textBuffer.match createdPat
+      return matches[1]
 
   willBeChecked: (filename) ->
     current = path.extname(filename)
@@ -79,6 +102,11 @@ module.exports = NorminetteLinter =
       scope: 'file'
       lintOnFly: false
       lint: (textEditor) =>
+        creatorLogin = @headerCreator(textEditor.getBuffer().getText())
+        if !@authorized(creatorLogin)
+          atom.notifications.addWarning(sprintf "%s is someone I don't like !",
+            creatorLogin)
+          return
         parameters = [textEditor.getPath()]
         if @willBeChecked(textEditor.getPath()) == false
           return
