@@ -5,7 +5,7 @@
   "description": "A linter for the 42 school norm",
   "keywords": [
     "42",
-    "norme",
+    "norm",
     "linter"
   ],
   "repository": "https://github.com/Kerosene2000/atom-norminette-linter",

@@ -3,8 +3,8 @@
 A linter for the 42 school norm.
 
 ##### Some settings are present:
- - extensions that the linter will check.
- - the executable path to the `42 norminette bin`.
+ - change extensions that the linter will check.
+ - change the executable path to the `42 norminette binary`.
 
 #### warning !
 

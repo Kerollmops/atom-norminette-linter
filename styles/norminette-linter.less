@@ -4,5 +4,20 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
-.norminette-linter {
+atom-text-editor::shadow .linter-highlight, .linter-highlight{
+  &.norm {
+    /* Style for Message Badges */
+    &:not(.line-number) {
+      background-color: white;
+      color: black;
+    }
+    /* Style for Gutter */
+    .icon-right::before {
+      color: white;
+    }
+    /* Style for the text editor highlight */
+    .region {
+      border-bottom: 1px dashed #ABB2C0;
+    }
+  }
 }
