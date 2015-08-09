@@ -103,7 +103,7 @@ module.exports = NorminetteLinter =
       lintOnFly: false
       lint: (textEditor) =>
         creatorLogin = @headerCreator(textEditor.getBuffer().getText())
-        if !@authorized(creatorLogin)
+        if creatorLogin && !@authorized(creatorLogin)
           atom.notifications.addWarning(sprintf "%s is someone I don't like !",
             creatorLogin)
         parameters = [textEditor.getPath()]
