@@ -12,7 +12,7 @@ module.exports = NorminetteLinter =
       default: ['.c', '.h']
       items:
         type: 'string'
-      description: 'Extensions that the linter will check'
+      description: 'Extensions that the linter will check.'
 
   activate: (state) ->
     # console.log "loaded package linter: ", atom.packages.getLoadedPackage("linter")
