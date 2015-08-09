@@ -106,7 +106,6 @@ module.exports = NorminetteLinter =
         if !@authorized(creatorLogin)
           atom.notifications.addWarning(sprintf "%s is someone I don't like !",
             creatorLogin)
-          return
         parameters = [textEditor.getPath()]
         if @willBeChecked(textEditor.getPath()) == false
           return
