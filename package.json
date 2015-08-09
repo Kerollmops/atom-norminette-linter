@@ -2,13 +2,13 @@
   "name": "norminette-linter",
   "main": "./lib/norminette-linter",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "A linter for the 42 school norme",
   "keywords": [
     "42",
     "norme",
     "linter"
   ],
-  "repository": "https://github.com/Kerosene2000/norminette-linter",
+  "repository": "https://github.com/Kerosene2000/atom-norminette-linter",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
