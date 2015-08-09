@@ -1,7 +1,7 @@
 {
   "name": "norminette-linter",
   "main": "./lib/norminette-linter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A linter for the 42 school norm",
   "keywords": [
     "42",
