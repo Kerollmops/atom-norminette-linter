@@ -1,7 +1,6 @@
 {CompositeDisposable} = require "atom"
 
 module.exports = NorminetteLinter =
-
   config:
     executablePath:
       type: 'string'
@@ -15,8 +14,8 @@ module.exports = NorminetteLinter =
         { detail: "Please install the `linter` package in your Settings view." }
       )
     @subscriptions = new CompositeDisposable
-    @subscriptions.add atom.config.observe 'norminette-linter.executablePath', (executablePath) =>
-        @executablePath = executablePath
+    @subscriptions.add atom.config.observe 'norminette-linter.executablePath',
+      (executablePath) => @executablePath = executablePath
 
   deactivate: ->
     @subscriptions.dispose()
@@ -36,14 +35,8 @@ module.exports = NorminetteLinter =
       lintOnFly: false
       lint: (textEditor) =>
         parameters = [textEditor.getPath()]
-        # message = {
-        #   type: 'Error',
-        #   text: 'Something went wrong',
-        #   filePath: textEditor.getPath(),
-        #   range: [[0,0], [0,5]]
-        # }
         # # /Users/crenault/Desktop/norminette
-        return helpers.exec(@executablePath, parameters).then (output) ->
-          return helpers.parse(output, regex, filePath: textEditor.getPath()).map (error) ->
-            error.type = 'Error'
-            return error
+        helpers.exec(@executablePath, parameters).then (out) ->
+          helpers.parse(out, regex, filePath: textEditor.getPath()).map (err) ->
+            err.type = 'Error'
+            err
