@@ -1,0 +1,26 @@
+{
+  "name": "norminette-linter",
+  "main": "./lib/norminette-linter",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+    "42",
+    "norme",
+    "linter"
+  ],
+  "repository": "https://github.com/Kerosene2000/norminette-linter",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "atom-linter": "^3.0.0"
+  },
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  }
+}
