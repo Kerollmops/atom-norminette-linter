@@ -71,7 +71,7 @@ module.exports = NorminetteLinter =
 
   getEachError: (line, filePath, textEditor) ->
     regex = /// ^
-    Error\s*\(?
+    (?:Error|Warning)\s*\(?
     (?:\s*line\s*([0-9]+))?   # [1] get line
     \s*,?
     (?:\s*col\s*([0-9]+))?    # [2] get column

@@ -1,3 +1,7 @@
+## 0.1.11 - blacklist
+* Know linter handle `Warnings` messages
+* TODO: display/compute good error position
+
 ## 0.1.7 - blacklist
 * Added blacklist for bad people
 * TODO: display/compute good error position

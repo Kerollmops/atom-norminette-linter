@@ -11,4 +11,6 @@ A linter for the 42 school norm.
 To be able to use this `linter` you'll need to
 `install` the [linter](https://atom.io/packages/linter) package first.
 
+Thanks to `@dtortera` for the help !
+
 ![norminette in action](http://i.imgur.com/bzorLBT.png)
