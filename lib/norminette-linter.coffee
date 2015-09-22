@@ -16,16 +16,10 @@ module.exports = NorminetteLinter =
         type: 'string'
       description: 'Extensions that the linter will check.'
 
-  blacklist: ["wandre", "agoomany"]
   login: null
 
   activate: (state) ->
     @login = process.env.USER ? null
-    if !@authorized(@login)
-      atom.notifications.addError(
-        sprintf "sorry, %s you are not authorized to use the norminette linter \
-          because I don't like you...", @login)
-      return
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'norminette-linter.executablePath',
       (executablePath) => @executablePath = executablePath
@@ -34,14 +28,6 @@ module.exports = NorminetteLinter =
 
   deactivate: ->
     @subscriptions.dispose()
-
-  # check authorized users
-  authorized: (login) ->
-    return true if !login?
-    login = login.replace /^\s+|\s+$/g, ""
-    for l in @blacklist
-      return false if l == login
-    return true
 
   headerCreator: (textBuffer) ->
     createdPat = /Created: \d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2} by (.{1,8})/
@@ -104,9 +90,6 @@ module.exports = NorminetteLinter =
       lintOnFly: false
       lint: (textEditor) =>
         creatorLogin = @headerCreator(textEditor.getBuffer().getText())
-        if !@authorized(creatorLogin)
-          atom.notifications.addWarning(sprintf "%s is someone I don't like !",
-            creatorLogin)
         parameters = [textEditor.getPath()]
         if @willBeChecked(textEditor.getPath()) == false
           return
