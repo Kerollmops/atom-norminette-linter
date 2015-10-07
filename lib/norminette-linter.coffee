@@ -85,6 +85,7 @@ module.exports = NorminetteLinter =
   provideLinter: ->
     helpers = require 'atom-linter'
     provider =
+      name: 'norminette'
       grammarScopes: ["source.c", "source.cpp"]
       scope: 'file'
       lintOnFly: false
