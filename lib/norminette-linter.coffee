@@ -287,11 +287,16 @@ module.exports = NorminetteLinter =
     match = regex.exec(line)
     if !match
       return null
-    message = {
+    message =
+    {
       type: 'Norm',
-      text: match[3],
-      range: @getValidRange(match[1], match[2], textEditor),
-      filePath: filePath
+      excerpt: match[3],
+      severity: 'error',
+      location:
+      {
+          file: filePath,
+          position: @getValidRange(match[1], match[2], textEditor)
+      }
     }
 
   getErrors: (output, filePath, textEditor) ->
@@ -305,10 +310,10 @@ module.exports = NorminetteLinter =
   provideLinter: ->
     helpers = require 'atom-linter'
     provider =
-      name: 'norminette'
-      grammarScopes: ['source.c', 'source.cpp']
       scope: 'file'
-      lintOnFly: false
+      name: 'norminette'
+      lintsOnChange: false
+      grammarScopes: ['source.c', 'source.cpp']
       lint: (textEditor) =>
         creatorLogin = @headerCreator(textEditor.getBuffer().getText())
         rules = Object.keys(atom.config.settings['norminette-linter']).filter((s) -> s.startsWith('rules_')).map((s) -> s.replace('rules_', ''))
