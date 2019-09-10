@@ -292,8 +292,7 @@ module.exports = NorminetteLinter =
       type: 'Norm',
       excerpt: match[3],
       severity: 'error',
-      location:
-      {
+      location: {
           file: filePath,
           position: @getValidRange(match[1], match[2], textEditor)
       }
